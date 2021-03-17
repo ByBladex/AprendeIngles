@@ -2,20 +2,22 @@ package com.example.aprendeingles;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Objects;
 
 public class Palabra {
     String traduceEnglish;
     String traduceSpanish;
     TipoPalabra tipoPalabra;
     LocalDateTime fechaIntro;
-    Date fechaUltTest;
+    GregorianCalendar fechaUltTest;
     Integer numAciertosTest;
 
-    Palabra(String traduceEnglish, String traduceSpanish, TipoPalabra tipoPalabra, LocalDateTime fechaIntro, Date fechaUltTest, Integer numAciertosTest){
+    Palabra(String traduceEnglish, String traduceSpanish, TipoPalabra tipoPalabra, GregorianCalendar fechaUltTest, Integer numAciertosTest){
         this.traduceEnglish = traduceEnglish;
         this.traduceSpanish = traduceSpanish;
         this.tipoPalabra = tipoPalabra;
-        this.fechaIntro = fechaIntro;
+        this.fechaIntro = LocalDateTime.now();
         this.fechaUltTest = fechaUltTest;
         this.numAciertosTest = numAciertosTest;
     }
@@ -52,11 +54,11 @@ public class Palabra {
         this.fechaIntro = fechaIntro;
     }
 
-    public Date getFechaUltTest() {
+    public GregorianCalendar getFechaUltTest() {
         return fechaUltTest;
     }
 
-    public void setFechaUltTest(Date fechaUltTest) {
+    public void setFechaUltTest(GregorianCalendar fechaUltTest) {
         this.fechaUltTest = fechaUltTest;
     }
 
@@ -67,4 +69,6 @@ public class Palabra {
     public void setNumAciertosTest(Integer numAciertosTest) {
         this.numAciertosTest = numAciertosTest;
     }
+
+
 }
