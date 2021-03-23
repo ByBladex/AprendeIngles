@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         listaPalabras.add(new Palabra("House", "Casa", TipoPalabra.PALABRA, new GregorianCalendar(03,03,2021), 0));
         listaPalabras.add(new Palabra("Horse", "Caballo", TipoPalabra.PALABRA, new GregorianCalendar(17,03,2021), 0));
 
-
     }
 
     public void añadir(View v) {
@@ -38,4 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void aprender(View v){
+        setContentView(R.layout.activity_aprender);
+    }
 }

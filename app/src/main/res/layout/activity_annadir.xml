@@ -7,7 +7,22 @@
     android:background="#303030">
 
     <EditText
-        android:id="@+id/txtModificar"
+        android:id="@+id/txtModificar2"
+        android:layout_width="267dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtModificar1" />
+
+    <EditText
+        android:id="@+id/txtModificar1"
         android:layout_width="267dp"
         android:layout_height="42dp"
         android:layout_marginTop="4dp"
@@ -18,7 +33,6 @@
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -26,21 +40,23 @@
         android:id="@+id/btnModificarPalabra"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#0AB38C"
         android:text="Ok"
         android:textAlignment="center"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/txtModificar"
-        app:layout_constraintTop_toTopOf="@+id/txtModificar" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtModificar2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="93dp"
         android:layout_height="20dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="72dp"
         android:enabled="false"
         android:forceHasOverlappingRendering="false"
         android:text="Modificar"
@@ -49,7 +65,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAñadir" />
 
