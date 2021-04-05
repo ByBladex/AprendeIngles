@@ -69,5 +69,4 @@ public class Palabra {
     public void setNumAciertosTest(Integer numAciertosTest) {
         this.numAciertosTest = numAciertosTest;
     }
-    
 }
