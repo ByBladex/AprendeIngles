@@ -28,10 +28,14 @@ public class DAOPalabra{
         Collections.shuffle(listaPalabrasCopia);
     }
 
-    public static void modificarPalabra(Palabra palabra, Palabra nuevaPalabra){
-        if(listaPalabras.contains(palabra)){
-            listaPalabras.remove(palabra);
-            listaPalabras.add(nuevaPalabra);
+    public static void modificarPalabra(String palabraÍng, String palabraEsp, String nuevaPalabraIng, String nuevaPalabraEsp){
+        for (int i=0;i<listaPalabrasCopia.size();i++) {
+            if(listaPalabrasCopia.get(i).traduceEnglish.equals(palabraÍng) &&
+                    listaPalabrasCopia.get(i).traduceSpanish.equals(palabraEsp)) {
+
+                listaPalabrasCopia.get(i).setTraduceEnglish(nuevaPalabraIng);
+                listaPalabrasCopia.get(i).setTraduceSpanish(nuevaPalabraEsp);
+            }
         }
     }
 

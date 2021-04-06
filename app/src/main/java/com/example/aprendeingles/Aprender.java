@@ -10,11 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
 public class Aprender extends AppCompatActivity {
     DAOPalabra daoPalabra = new DAOPalabra();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +31,27 @@ public class Aprender extends AppCompatActivity {
         if(daoPalabra.listaPalabrasCopia.isEmpty())
             daoPalabra.crearListaCopia();
 
+        //Etiqueta en la que saldrá la palabra aleatoria
         TextView lblPalabra = findViewById(R.id.lblPalabra);
-        Button btnCACA = findViewById(R.id.button);
 
-        int randomIndex = (int)(Math.random()*daoPalabra.listaPalabrasCopia.size());
-        Palabra random = daoPalabra.listaPalabrasCopia.get(randomIndex);
+        //Botones
+        Button btn1 = findViewById(R.id.button);
+        Button btn2 = findViewById(R.id.button2);
+        Button btn3 = findViewById(R.id.button3);
+        Button btn4 = findViewById(R.id.button4);
+
+        //Array botones de las respuestas
+        Button[] botonesRespuestas = {btn1,btn2,btn3,btn4};
+        for(int i=0;i<botonesRespuestas.length-1;i++){
+            int randomIndBtn = (int)(Math.random()*botonesRespuestas.length);
+            botonesRespuestas[randomIndBtn].setText();
+        }
+
+
+        //Random de la palabra en ingles aleatoria
+        int randomInd = (int)(Math.random()*daoPalabra.listaPalabrasCopia.size());
+        Palabra random = daoPalabra.listaPalabrasCopia.get(randomInd);
         lblPalabra.setText(random.traduceEnglish);
-        btnCACA.setText(""+ daoPalabra.listaPalabrasCopia.size());
+        //btn1.setText(""+ daoPalabra.listaPalabrasCopia.size());
     }
 }

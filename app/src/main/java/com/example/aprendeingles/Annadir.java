@@ -24,12 +24,32 @@ public class Annadir extends AppCompatActivity {
         btnAnnadir.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(radioBtnExpresion.isChecked() || radioBtnPalabra.isChecked()){
-                    if(radioBtnExpresion.isChecked())
-                        daoPalabra.insertarPalabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.EXPRESION);
+                if(!txtAnnadirPalabraIng.getText().toString().isEmpty() && !txtAnnadirPalabraEsp.getText().toString().isEmpty()) {
+                    if (radioBtnExpresion.isChecked() || radioBtnPalabra.isChecked()) {
+                        if (radioBtnExpresion.isChecked()){
+                            daoPalabra.insertarPalabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.EXPRESION);
+                        }
 
-                    else if(radioBtnPalabra.isChecked())
-                        daoPalabra.insertarPalabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.PALABRA);
+                        else if (radioBtnPalabra.isChecked()){
+                            daoPalabra.insertarPalabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.PALABRA);
+                        }
+                    }
+                }
+            }
+        });
+        Button btnModificar = findViewById(R.id.btnModificarPalabra);
+        EditText txtModificarPalabraIng = findViewById(R.id.txtModificarPalabraIng);
+        EditText txtModificarPalabraIng2 = findViewById(R.id.txtModificarPalabraIng2);
+        EditText txtModificarPalabraEsp = findViewById(R.id.txtModificarPalabraEsp);
+        EditText txtModificarPalabraEsp2 = findViewById(R.id.txtModificarPalabraEsp2);
+
+        btnModificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!txtModificarPalabraIng.getText().toString().isEmpty() && !txtModificarPalabraEsp.getText().toString().isEmpty()
+                  && !txtModificarPalabraIng2.getText().toString().isEmpty() && !txtModificarPalabraEsp2.getText().toString().isEmpty()){
+
+                    daoPalabra.modificarPalabra(txtModificarPalabraIng.getText().toString(), txtModificarPalabraEsp.getText().toString(), txtModificarPalabraIng2.getText().toString(), txtModificarPalabraEsp2.getText().toString());
                 }
             }
         });

@@ -7,12 +7,44 @@
     android:background="#303030">
 
     <EditText
+        android:id="@+id/txtModificarPalabraIng2"
+        android:layout_width="267dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nueva palabra en ingles"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtModificarPalabraEsp" />
+
+    <EditText
+        android:id="@+id/txtModificarPalabraEsp2"
+        android:layout_width="267dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nueva palabra en español"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtModificarPalabraIng2" />
+
+    <EditText
         android:id="@+id/txtAnnadirPalabraIng"
         android:layout_width="267dp"
         android:layout_height="42dp"
         android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint="Nueva palabra en ingles"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
@@ -27,6 +59,7 @@
         android:layout_marginTop="48dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint="Nueva palabra en español"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
@@ -51,27 +84,28 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/txtModificar2"
+        android:id="@+id/txtModificarPalabraEsp"
         android:layout_width="267dp"
         android:layout_height="42dp"
-        android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint="Palabra en español"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtModificar1" />
+        app:layout_constraintTop_toBottomOf="@+id/txtModificarPalabraIng" />
 
     <EditText
-        android:id="@+id/txtModificar1"
+        android:id="@+id/txtModificarPalabraIng"
         android:layout_width="267dp"
         android:layout_height="42dp"
         android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint="Palabra en ingles"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
@@ -84,17 +118,16 @@
         android:id="@+id/btnModificarPalabra"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
         android:backgroundTint="#0AB38C"
         android:text="Ok"
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtModificar2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtModificarPalabraEsp2"
+        app:layout_constraintVertical_bias="0.112" />
 
     <TextView
         android:id="@+id/textView6"
