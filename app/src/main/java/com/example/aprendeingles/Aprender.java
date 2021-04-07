@@ -1,5 +1,6 @@
 package com.example.aprendeingles;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
@@ -40,18 +42,68 @@ public class Aprender extends AppCompatActivity {
         Button btn3 = findViewById(R.id.button3);
         Button btn4 = findViewById(R.id.button4);
 
-        //Array botones de las respuestas
-        Button[] botonesRespuestas = {btn1,btn2,btn3,btn4};
-        for(int i=0;i<botonesRespuestas.length-1;i++){
-            int randomIndBtn = (int)(Math.random()*botonesRespuestas.length);
-            botonesRespuestas[randomIndBtn].setText();
-        }
-
+        //ArrayList botones de las respuestas
+        ArrayList<Button> botonesRespuestas = new ArrayList<Button>();
+        botonesRespuestas.add(btn1);
+        botonesRespuestas.add(btn2);
+        botonesRespuestas.add(btn3);
+        botonesRespuestas.add(btn4);
+        Collections.shuffle(botonesRespuestas);
 
         //Random de la palabra en ingles aleatoria
-        int randomInd = (int)(Math.random()*daoPalabra.listaPalabrasCopia.size());
-        Palabra random = daoPalabra.listaPalabrasCopia.get(randomInd);
-        lblPalabra.setText(random.traduceEnglish);
+        lblPalabra.setText(daoPalabra.generarPalabraAleatoria());
         //btn1.setText(""+ daoPalabra.listaPalabrasCopia.size());
+
+        //Array respuestas
+        ArrayList<String> respuestas = new ArrayList<String>();
+        daoPalabra.generarRespuestasAleatorias(respuestas);
+
+        for (int i=0;i<botonesRespuestas.size();i++){
+            botonesRespuestas.get(i).setText(respuestas.get(i));
+        }
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn1.getText().toString().equals(daoPalabra.random.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                }
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn2.getText().toString().equals(daoPalabra.random.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                }
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn3.getText().toString().equals(daoPalabra.random.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                }
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn4.getText().toString().equals(daoPalabra.random.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                }
+                finish();
+                startActivity(getIntent());
+            }
+        });
     }
 }

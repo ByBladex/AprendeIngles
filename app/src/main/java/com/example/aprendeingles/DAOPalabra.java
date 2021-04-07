@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 public class DAOPalabra{
     public static ArrayList<Palabra> listaPalabras= new ArrayList<Palabra>();
     public static ArrayList<Palabra> listaPalabrasCopia= new ArrayList<Palabra>();
-
+    public static Palabra random;
     DAOPalabra(){
         //Datos iniciales de la lista
         this.listaPalabras.add(new Palabra("Milk", "Leche", TipoPalabra.PALABRA, new GregorianCalendar(13,02,2021), 0));
@@ -43,5 +43,35 @@ public class DAOPalabra{
         for (Palabra palabra:listaPalabras) {
             listaPalabrasCopia.add(palabra);
         }
+    }
+
+    public static void sumarAcierto(String palabraEsp){
+        for(int i=0;i<listaPalabrasCopia.size();i++){
+            if(listaPalabrasCopia.get(i).traduceSpanish.equals(palabraEsp))
+                listaPalabrasCopia.get(i).numAciertosTest++;
+        }
+    }
+
+    public static String generarPalabraAleatoria(){
+        int randomInd = (int)(Math.random()*listaPalabrasCopia.size());
+        random = listaPalabrasCopia.get(randomInd);
+        String palabraAleatoria = random.traduceEnglish + " " + random.numAciertosTest;
+
+        return palabraAleatoria;
+    }
+
+    public static void generarRespuestasAleatorias(ArrayList<String> respuestas){
+        while(respuestas.size()<3){
+            int randomIndex = (int)(Math.random()*listaPalabrasCopia.size());
+            Palabra randomRespuesta = listaPalabrasCopia.get(randomIndex);
+            if(!randomRespuesta.traduceSpanish.equals(random.traduceSpanish) && !respuestas.contains(randomRespuesta.traduceSpanish))
+                respuestas.add(randomRespuesta.traduceSpanish);
+        }
+        respuestas.add(random.traduceSpanish);
+        Collections.shuffle(respuestas);
+    }
+
+    public static void mostrarTabla(){
+
     }
 }
