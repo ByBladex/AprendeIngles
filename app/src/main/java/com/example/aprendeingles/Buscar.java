@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import androidx.annotation.Nullable;
@@ -27,15 +28,20 @@ public class Buscar extends AppCompatActivity {
 
         ListView listViewPalabras = findViewById(R.id.listViewPalabras);
         ArrayList<String> palabrasIng = new ArrayList<>();
-        palabrasIng.add("Hola");
-        
-        for(int i=0;i<daoPalabra.listaPalabrasCopia.size();i++)
+
+        String[] array = new String[4];
+        array[0] = "Hola";
+        array[1] = "Que tal";
+        array[2] = "Buenas";
+        array[3] = "Adios";
+
+        /*for(int i=0;i<daoPalabra.listaPalabrasCopia.size();i++)
         {
             Palabra palabra = daoPalabra.listaPalabrasCopia.get(i);
-            //palabrasIng.add(palabra.traduceEnglish);
-        }
+            palabrasIng.add(palabra.traduceEnglish);
+        }*/
 
-        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, palabrasIng);
+        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, array);
         listViewPalabras.setAdapter(adaptador);
     }
 }
