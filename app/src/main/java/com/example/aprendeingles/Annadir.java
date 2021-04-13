@@ -15,6 +15,7 @@ public class Annadir extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_annadir);
+        daoPalabra.crearListaCopia();
 
         Button btnAnnadir = findViewById(R.id.btnAñadirPalabra);
         EditText txtAnnadirPalabraIng = findViewById(R.id.txtAnnadirPalabraIng);

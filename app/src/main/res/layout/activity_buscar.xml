@@ -10,7 +10,7 @@
         android:id="@+id/textView7"
         android:layout_width="379dp"
         android:layout_height="0dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="48dp"
         android:enabled="false"
         android:forceHasOverlappingRendering="false"
         android:text="Buscar por filtrado"
@@ -21,20 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAtras2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="#0AB38C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <RadioGroup
         android:id="@+id/radioGroup2"
@@ -76,45 +62,6 @@
             android:textColor="#FFFFFF"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="273dp" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="312dp"
-        android:layout_height="127dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.196">
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:enabled="false"
-            android:forceHasOverlappingRendering="false"
-            android:text="Filtrar por:"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Palabra"
-            android:textColor="#FFFFFF" />
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Expresión"
-            android:textColor="#FFFFFF" />
 
     </RadioGroup>
 
@@ -161,17 +108,61 @@
 
     </RadioGroup>
 
-    <ListView
-        android:id="@+id/listViewPalabras"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:background="#FFFFFF"
-        android:textColor="#000000"
+    <RadioGroup
+        android:id="@+id/radioGroup3"
+        android:layout_width="312dp"
+        android:layout_height="127dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.159">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:enabled="false"
+            android:forceHasOverlappingRendering="false"
+            android:text="Filtrar por:"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Palabra"
+            android:textColor="#FFFFFF"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="462dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Expresión"
+            android:textColor="#FFFFFF"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="510dp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnFiltrado"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="#0AB38C"
+        android:text="Buscar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup3"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,17 @@
 package com.example.aprendeingles;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-
-public class Buscar extends AppCompatActivity {
+public class Filtrado extends AppCompatActivity {
     DAOPalabra daoPalabra = new DAOPalabra();
 
     @Override
@@ -28,15 +21,17 @@ public class Buscar extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        setContentView(R.layout.activity_buscar);
-        daoPalabra.crearListaCopia();
-        Button btnFiltrar = findViewById(R.id.btnFiltrado);
-        btnFiltrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Filtrado.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_filtrado);
+        ArrayList<String> palabrasIng = new ArrayList<String>();
+
+        ListView listViewPalabras = findViewById(R.id.listViewPalabras);
+
+        for(int i=0;i<daoPalabra.listaPalabrasCopia.size();i++)
+        {
+            String palabraIng = daoPalabra.listaPalabrasCopia.get(i).traduceEnglish;
+            palabrasIng.add(palabraIng);
+        }
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, palabrasIng);
+        listViewPalabras.setAdapter(adaptador);
     }
 }

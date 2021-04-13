@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 public class DAOPalabra{
     public static ArrayList<Palabra> listaPalabras= new ArrayList<Palabra>();
     public static ArrayList<Palabra> listaPalabrasCopia= new ArrayList<Palabra>();
+
     public static Palabra random;
     DAOPalabra(){
         //Datos iniciales de la lista
@@ -40,8 +41,10 @@ public class DAOPalabra{
     }
 
     public static void crearListaCopia(){
-        for (Palabra palabra:listaPalabras) {
-            listaPalabrasCopia.add(palabra);
+        if(listaPalabrasCopia.isEmpty()){
+            for (Palabra palabra:listaPalabras) {
+                listaPalabrasCopia.add(palabra);
+            }
         }
     }
 
@@ -60,18 +63,14 @@ public class DAOPalabra{
         return palabraAleatoria;
     }
 
-    public static void generarRespuestasAleatorias(ArrayList<String> respuestas){
-        while(respuestas.size()<3){
-            int randomIndex = (int)(Math.random()*listaPalabrasCopia.size());
+    public static void generarRespuestasAleatorias(ArrayList<String> respuestas) {
+        while (respuestas.size() < 3) {
+            int randomIndex = (int) (Math.random() * listaPalabrasCopia.size());
             Palabra randomRespuesta = listaPalabrasCopia.get(randomIndex);
-            if(!randomRespuesta.traduceSpanish.equals(random.traduceSpanish) && !respuestas.contains(randomRespuesta.traduceSpanish))
+            if (!randomRespuesta.traduceSpanish.equals(random.traduceSpanish) && !respuestas.contains(randomRespuesta.traduceSpanish))
                 respuestas.add(randomRespuesta.traduceSpanish);
         }
         respuestas.add(random.traduceSpanish);
         Collections.shuffle(respuestas);
-    }
-
-    public static void mostrarTabla(){
-
     }
 }

@@ -29,9 +29,7 @@ public class Aprender extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_aprender);
-
-        if(daoPalabra.listaPalabrasCopia.isEmpty())
-            daoPalabra.crearListaCopia();
+        daoPalabra.crearListaCopia();
 
         //Etiqueta en la que saldrá la palabra aleatoria
         TextView lblPalabra = findViewById(R.id.lblPalabra);

@@ -19,6 +19,7 @@
         <activity android:name=".Buscar" />
         <activity android:name=".Aprender" />
         <activity android:name=".Annadir" />
+        <activity android:name=".Filtrado" />
     </application>
 
 </manifest>
