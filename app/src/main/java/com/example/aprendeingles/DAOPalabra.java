@@ -2,12 +2,13 @@ package com.example.aprendeingles;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 
 public class DAOPalabra{
     public static ArrayList<Palabra> listaPalabras= new ArrayList<Palabra>();
     public static ArrayList<Palabra> listaPalabrasCopia= new ArrayList<Palabra>();
-
+    public static ArrayList<String> palabrasIng;
     public static Palabra random;
     DAOPalabra(){
         //Datos iniciales de la lista
@@ -72,5 +73,39 @@ public class DAOPalabra{
         }
         respuestas.add(random.traduceSpanish);
         Collections.shuffle(respuestas);
+    }
+
+    public static void mostrarTodo(){
+        palabrasIng = new ArrayList<String>();
+        Collections.shuffle(listaPalabrasCopia);
+        for(int i=0;i<listaPalabrasCopia.size();i++)
+        {
+            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
+            palabrasIng.add(palabraIng);
+        }
+    }
+
+    public static void ordenAlfabetico(){
+        palabrasIng = new ArrayList<String>();
+        for(int i=0;i<listaPalabrasCopia.size();i++)
+        {
+            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
+            palabrasIng.add(palabraIng);
+        }
+        Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
+    }
+
+    public static void ordenAciertos(){
+        palabrasIng = new ArrayList<String>();
+        Collections.sort(listaPalabrasCopia, (new Comparator<Palabra>() {
+            public int compare(Palabra i1, Palabra i2) {
+                return i1.numAciertosTest.compareTo(i2.numAciertosTest);
+            }
+        }).reversed());
+        for(int i=0;i<listaPalabrasCopia.size();i++)
+        {
+            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
+            palabrasIng.add(palabraIng);
+        }
     }
 }

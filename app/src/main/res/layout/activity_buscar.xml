@@ -46,7 +46,7 @@
             android:textStyle="bold" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioBtnOrdenAlf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Orden alfabético"
@@ -55,7 +55,7 @@
             tools:layout_editor_absoluteY="225dp" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioBtnOrdenAciertos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Número aciertos"
@@ -89,7 +89,7 @@
             android:textStyle="bold" />
 
         <RadioButton
-            android:id="@+id/radioButton8"
+            android:id="@+id/radioBtnIngles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Inglés"
@@ -98,7 +98,7 @@
             tools:layout_editor_absoluteY="376dp" />
 
         <RadioButton
-            android:id="@+id/radioButton7"
+            android:id="@+id/radioBtnEspannol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Español"
@@ -132,7 +132,7 @@
             android:textStyle="bold" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/radioBtnOrdenPalabra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Palabra"
@@ -141,7 +141,7 @@
             tools:layout_editor_absoluteY="462dp" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/radioBtnOrdenExp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Expresión"
