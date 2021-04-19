@@ -35,10 +35,13 @@ public class Buscar extends AppCompatActivity {
 
         RadioButton radioBtnOrdenAlf = findViewById(R.id.radioBtnOrdenAlf);
         RadioButton radioBtnOrdenAciertos = findViewById(R.id.radioBtnOrdenAciertos);
-
+        RadioButton radioBtnIngles = findViewById(R.id.radioBtnIngles);
+        RadioButton radioBtnEspanol = findViewById(R.id.radioBtnEspannol);
+        RadioButton radioBtnPalabra = findViewById(R.id.radioBtnOrdenPalabra);
+        RadioButton radioBtnExpresion = findViewById(R.id.radioBtnOrdenExp);
 
         final RadioGroup group2= (RadioGroup) findViewById(R.id.radioGroup2);
-        if(!radioBtnOrdenAlf.isChecked() && !radioBtnOrdenAciertos.isChecked())
+        if(!radioBtnOrdenAlf.isChecked() && !radioBtnOrdenAciertos.isChecked() && !radioBtnIngles.isChecked() && !radioBtnEspanol.isChecked() && !radioBtnPalabra.isChecked() && !radioBtnExpresion.isChecked())
             daoPalabra.mostrarTodo();
         group2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -50,6 +53,18 @@ public class Buscar extends AppCompatActivity {
                         break;
                     case R.id.radioBtnOrdenAciertos:
                         daoPalabra.ordenAciertos();
+                        break;
+                    case R.id.radioBtnIngles:
+                        daoPalabra.mostrarIngles();
+                        break;
+                    case R.id.radioBtnEspannol:
+                        daoPalabra.mostrarEspanol();
+                        break;
+                    case R.id.radioBtnOrdenPalabra:
+                        daoPalabra.mostrarSoloPalabras();
+                        break;
+                    case R.id.radioBtnOrdenExp:
+                        daoPalabra.mostrarSoloExpresiones();
                         break;
                 }
             }

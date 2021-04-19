@@ -1,8 +1,12 @@
 package com.example.aprendeingles;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -29,5 +33,30 @@ public class Filtrado extends AppCompatActivity {
 
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, daoPalabra.palabrasIng);
         listViewPalabras.setAdapter(adaptador);
+        listViewPalabras.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final int posicion=position;
+
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Filtrado.this);
+                dialogo1.setTitle("Importante");
+                dialogo1.setMessage("¿Eliminar esta palabra?");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        daoPalabra.listaPalabrasCopia.remove(posicion);
+                        daoPalabra.palabrasIng.remove(posicion);
+                        adaptador.notifyDataSetChanged();
+                    }
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                    }
+                });
+                dialogo1.show();
+
+                return false;
+            }
+        });
     }
 }

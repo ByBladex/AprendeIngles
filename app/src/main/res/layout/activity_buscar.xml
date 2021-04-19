@@ -24,8 +24,8 @@
 
     <RadioGroup
         android:id="@+id/radioGroup2"
-        android:layout_width="311dp"
-        android:layout_height="128dp"
+        android:layout_width="317dp"
+        android:layout_height="320dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
@@ -63,31 +63,6 @@
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="273dp" />
 
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="311dp"
-        android:layout_height="128dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
-        app:layout_constraintVertical_bias="0.081">
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:enabled="false"
-            android:forceHasOverlappingRendering="false"
-            android:text="Filtrar por:"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
         <RadioButton
             android:id="@+id/radioBtnIngles"
             android:layout_width="match_parent"
@@ -105,31 +80,6 @@
             android:textColor="#FFFFFF"
             tools:layout_editor_absoluteX="52dp"
             tools:layout_editor_absoluteY="424dp" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="312dp"
-        android:layout_height="127dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.159">
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:enabled="false"
-            android:forceHasOverlappingRendering="false"
-            android:text="Filtrar por:"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/radioBtnOrdenPalabra"
@@ -155,14 +105,13 @@
         android:id="@+id/btnFiltrado"
         android:layout_width="120dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="64dp"
         android:backgroundTint="#0AB38C"
         android:text="Buscar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+        app:layout_constraintVertical_bias="0.087" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.aprendeingles;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
@@ -107,5 +108,40 @@ public class DAOPalabra{
             String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
             palabrasIng.add(palabraIng);
         }
+    }
+
+    public static void mostrarIngles(){
+        ordenAlfabetico();
+    }
+
+    public static void mostrarEspanol(){
+        palabrasIng = new ArrayList<String>();
+        for(int i=0;i<listaPalabrasCopia.size();i++)
+        {
+            String palabraIng = listaPalabrasCopia.get(i).traduceSpanish;
+            palabrasIng.add(palabraIng);
+        }
+    }
+
+    public static void mostrarSoloPalabras(){
+        palabrasIng = new ArrayList<String>();
+        for(int i=0;i<listaPalabrasCopia.size();i++)
+        {
+            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
+            if(listaPalabrasCopia.get(i).tipoPalabra.equals(TipoPalabra.PALABRA))
+                palabrasIng.add(palabraIng);
+        }
+        Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
+    }
+
+    public static void mostrarSoloExpresiones(){
+        palabrasIng = new ArrayList<String>();
+        for(int i=0;i<listaPalabrasCopia.size();i++)
+        {
+            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
+            if(listaPalabrasCopia.get(i).tipoPalabra.equals(TipoPalabra.EXPRESION))
+                palabrasIng.add(palabraIng);
+        }
+        Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
     }
 }
