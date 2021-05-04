@@ -10,7 +10,9 @@ public class DAOPalabra{
     public static ArrayList<Palabra> listaPalabras= new ArrayList<Palabra>();
     public static ArrayList<Palabra> listaPalabrasCopia= new ArrayList<Palabra>();
     public static ArrayList<String> palabrasIng;
-    public static Palabra random;
+    public static ArrayList<Palabra> test= new ArrayList<Palabra>();
+    public static Palabra palabra;
+    private static int ind=0;
     DAOPalabra(){
         //Datos iniciales de la lista
         this.listaPalabras.add(new Palabra("Milk", "Leche", TipoPalabra.PALABRA, new GregorianCalendar(13,02,2021), 0));
@@ -58,21 +60,21 @@ public class DAOPalabra{
     }
 
     public static String generarPalabraAleatoria(){
-        int randomInd = (int)(Math.random()*listaPalabrasCopia.size());
-        random = listaPalabrasCopia.get(randomInd);
-        String palabraAleatoria = random.traduceEnglish + " " + random.numAciertosTest;
+        palabra = test.get(ind);
+        ind++;
+        String siguientePalabra = palabra.traduceEnglish + " " + palabra.numAciertosTest;
 
-        return palabraAleatoria;
+        return siguientePalabra;
     }
 
     public static void generarRespuestasAleatorias(ArrayList<String> respuestas) {
         while (respuestas.size() < 3) {
             int randomIndex = (int) (Math.random() * listaPalabrasCopia.size());
             Palabra randomRespuesta = listaPalabrasCopia.get(randomIndex);
-            if (!randomRespuesta.traduceSpanish.equals(random.traduceSpanish) && !respuestas.contains(randomRespuesta.traduceSpanish))
+            if (!randomRespuesta.traduceSpanish.equals(palabra.traduceSpanish) && !respuestas.contains(randomRespuesta.traduceSpanish))
                 respuestas.add(randomRespuesta.traduceSpanish);
         }
-        respuestas.add(random.traduceSpanish);
+        respuestas.add(palabra.traduceSpanish);
         Collections.shuffle(respuestas);
     }
 
@@ -143,5 +145,16 @@ public class DAOPalabra{
                 palabrasIng.add(palabraIng);
         }
         Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
+    }
+
+    public void generarTest(){
+        ordenAciertos();
+        for (int i=0;i<5;i++){
+            test.add(listaPalabrasCopia.get((listaPalabrasCopia.size()-1)-i));
+        }
+    }
+
+    public void reiniciarTest(){
+        test.clear();
     }
 }

@@ -20,7 +20,6 @@ import java.util.Random;
 public class Aprender extends AppCompatActivity {
     DAOPalabra daoPalabra = new DAOPalabra();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +29,8 @@ public class Aprender extends AppCompatActivity {
         }
         setContentView(R.layout.activity_aprender);
         daoPalabra.crearListaCopia();
+        daoPalabra.reiniciarTest();
+        daoPalabra.generarTest();
 
         //Etiqueta en la que saldrá la palabra aleatoria
         TextView lblPalabra = findViewById(R.id.lblPalabra);
@@ -63,44 +64,68 @@ public class Aprender extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn1.getText().toString().equals(daoPalabra.random.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                if(btn1.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
                 }
-                finish();
-                startActivity(getIntent());
+                if(!daoPalabra.test.isEmpty()){
+                    finish();
+                    startActivity(getIntent());
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn2.getText().toString().equals(daoPalabra.random.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                if(btn2.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
                 }
-                finish();
-                startActivity(getIntent());
+                if(!daoPalabra.test.isEmpty()){
+                    finish();
+                    startActivity(getIntent());
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn3.getText().toString().equals(daoPalabra.random.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                if(btn3.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
                 }
-                finish();
-                startActivity(getIntent());
+                if(!daoPalabra.test.isEmpty()){
+                    finish();
+                    startActivity(getIntent());
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn4.getText().toString().equals(daoPalabra.random.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.random.traduceSpanish);
+                if(btn4.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
                 }
-                finish();
-                startActivity(getIntent());
+                if(!daoPalabra.test.isEmpty()){
+                    finish();
+                    startActivity(getIntent());
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
