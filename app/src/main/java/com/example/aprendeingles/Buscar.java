@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 
 public class Buscar extends AppCompatActivity {
-    DAOPalabra daoPalabra = new DAOPalabra();
+    DAOPalabra daoPalabra = new DAOPalabra(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,6 @@ public class Buscar extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_buscar);
-        daoPalabra.crearListaCopia();
 
         RadioButton radioBtnOrdenAlf = findViewById(R.id.radioBtnOrdenAlf);
         RadioButton radioBtnOrdenAciertos = findViewById(R.id.radioBtnOrdenAciertos);

@@ -1,25 +1,33 @@
 package com.example.aprendeingles;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Objects;
 
 public class Palabra {
     String traduceEnglish;
     String traduceSpanish;
-    TipoPalabra tipoPalabra;
+    String tipoPalabra;
     LocalDateTime fechaIntro;
-    GregorianCalendar fechaUltTest;
-    Integer numAciertosTest;
+    String fechaUltTest;
+    int numAciertosTest;
 
-    Palabra(String traduceEnglish, String traduceSpanish, TipoPalabra tipoPalabra, GregorianCalendar fechaUltTest, Integer numAciertosTest){
+    Palabra(String traduceEnglish, String traduceSpanish, String tipoPalabra, String fechaUltTest, int numAciertosTest){
         this.traduceEnglish = traduceEnglish;
         this.traduceSpanish = traduceSpanish;
         this.tipoPalabra = tipoPalabra;
         this.fechaIntro = LocalDateTime.now();
         this.fechaUltTest = fechaUltTest;
         this.numAciertosTest = numAciertosTest;
+    }
+
+    Palabra(String traduceEnglish, String traduceSpanish, String tipoPalabra){
+        this.traduceEnglish = traduceEnglish;
+        this.traduceSpanish = traduceSpanish;
+        this.tipoPalabra = tipoPalabra;
+    }
+
+    Palabra(String traduceEnglish) {
+        this.traduceEnglish = traduceEnglish;
     }
 
     public String getTraduceEnglish() {
@@ -38,11 +46,11 @@ public class Palabra {
         this.traduceSpanish = traduceSpanish;
     }
 
-    public TipoPalabra getTipoPalabra() {
+    public String getTipoPalabra() {
         return tipoPalabra;
     }
 
-    public void setTipoPalabra(TipoPalabra tipoPalabra) {
+    public void setTipoPalabra(String tipoPalabra) {
         this.tipoPalabra = tipoPalabra;
     }
 
@@ -54,19 +62,19 @@ public class Palabra {
         this.fechaIntro = fechaIntro;
     }
 
-    public GregorianCalendar getFechaUltTest() {
+    public String getFechaUltTest() {
         return fechaUltTest;
     }
 
-    public void setFechaUltTest(GregorianCalendar fechaUltTest) {
+    public void setFechaUltTest(String fechaUltTest) {
         this.fechaUltTest = fechaUltTest;
     }
 
-    public Integer getNumAciertosTest() {
+    public int getNumAciertosTest() {
         return numAciertosTest;
     }
 
-    public void setNumAciertosTest(Integer numAciertosTest) {
+    public void setNumAciertosTest(int numAciertosTest) {
         this.numAciertosTest = numAciertosTest;
     }
 }

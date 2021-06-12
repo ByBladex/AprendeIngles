@@ -1,61 +1,148 @@
 package com.example.aprendeingles;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 
 public class DAOPalabra{
-    public static ArrayList<Palabra> listaPalabras= new ArrayList<Palabra>();
-    public static ArrayList<Palabra> listaPalabrasCopia= new ArrayList<Palabra>();
-    public static ArrayList<String> palabrasIng;
+    public static ArrayList<Palabra> listaPalabras;
+    public static ArrayList<Palabra> palabrasIng;
     public static ArrayList<Palabra> test= new ArrayList<Palabra>();
+    private ConexionSQLite conn;
+    private SQLiteDatabase db;
     public static Palabra palabra;
     private static int ind=0;
-    DAOPalabra(){
+
+    DAOPalabra(Context context){
         //Datos iniciales de la lista
-        this.listaPalabras.add(new Palabra("Milk", "Leche", TipoPalabra.PALABRA, new GregorianCalendar(13,02,2021), 0));
-        this.listaPalabras.add(new Palabra("Cow", "Vaca", TipoPalabra.PALABRA, new GregorianCalendar(21,01,2021), 0));
-        this.listaPalabras.add(new Palabra("House", "Casa", TipoPalabra.PALABRA, new GregorianCalendar(03,03,2021), 0));
-        this.listaPalabras.add(new Palabra("Horse", "Caballo", TipoPalabra.PALABRA, new GregorianCalendar(17,03,2021), 0));
-        this.listaPalabras.add(new Palabra("Lettuce", "Lechuga", TipoPalabra.PALABRA, new GregorianCalendar(07,02,2021), 0));
-        this.listaPalabras.add(new Palabra("My name is Jeff", "Mi nombre es Jeff", TipoPalabra.EXPRESION, new GregorianCalendar(10,03,2021), 0));
-        this.listaPalabras.add(new Palabra("Hello, whats your name?", "Hola, ¿como te llamas?", TipoPalabra.EXPRESION, new GregorianCalendar(17,03,2021), 0));
-        this.listaPalabras.add(new Palabra("I live in Jerez", "Yo vivo en Jerez", TipoPalabra.EXPRESION, new GregorianCalendar(16,01,2021), 0));
-        this.listaPalabras.add(new Palabra("I have a pencil", "Yo tengo un lapiz", TipoPalabra.EXPRESION, new GregorianCalendar(04,04,2021), 0));
+        listaPalabras = new ArrayList<Palabra>();
+        conn = new ConexionSQLite(context);
 
-        Collections.shuffle(listaPalabras);
+        rellenarListado();
     }
 
-    public static void insertarPalabra(String palabraIng, String palabraEsp, TipoPalabra tipo){
-        listaPalabrasCopia.add(new Palabra(palabraIng, palabraEsp, tipo, new GregorianCalendar(0,0,0),0));
-        Collections.shuffle(listaPalabrasCopia);
+    public ArrayList<Palabra> getPalabrasIng(){
+        return palabrasIng;
     }
 
-    public static void modificarPalabra(String palabraÍng, String palabraEsp, String nuevaPalabraIng, String nuevaPalabraEsp){
-        for (int i=0;i<listaPalabrasCopia.size();i++) {
-            if(listaPalabrasCopia.get(i).traduceEnglish.equals(palabraÍng) &&
-                    listaPalabrasCopia.get(i).traduceSpanish.equals(palabraEsp)) {
-
-                listaPalabrasCopia.get(i).setTraduceEnglish(nuevaPalabraIng);
-                listaPalabrasCopia.get(i).setTraduceSpanish(nuevaPalabraEsp);
+    public int rellenarListado(){
+        try{
+            db = conn.getWritableDatabase();
+            listaPalabras.clear();
+            if(db != null){
+                Cursor c = db.rawQuery("SELECT * FROM Palabra", null);
+                if(c.moveToFirst()){
+                    do{
+                        listaPalabras.add(new Palabra(c.getString(0),c.getString(1),c.getString(2),c.getString(3),c.getInt(4)));
+                    }
+                    while(c.moveToNext());
+                }
+                c.close();
+                db.close();
+                return 1;
             }
+            return 0;
+        }
+        catch(SQLException e){
+            return 0;
         }
     }
 
-    public static void crearListaCopia(){
-        if(listaPalabrasCopia.isEmpty()){
-            for (Palabra palabra:listaPalabras) {
-                listaPalabrasCopia.add(palabra);
+    public int insertarPalabra(Palabra palabra){
+        try{
+            db = conn.getWritableDatabase();
+            if(db!=null){
+                db.execSQL("INSERT INTO Palabra (ingles, español, tipo, fechaintro,fechaulttest, numaciertos) " +
+                        "VALUES ('"+palabra.getTraduceEnglish()+"', '"+palabra.getTraduceSpanish()+"', '"+palabra.getTipoPalabra()+"', '"
+                        +palabra.getFechaIntro()+"', '"+palabra.getFechaUltTest()+"', '"+palabra.getNumAciertosTest()+"')");
+                rellenarListado();
+                db.close();
+                return 1;
             }
+            else {
+                return 0;
+            }
+        }
+        catch(SQLException e){
+            return 0;
         }
     }
 
-    public static void sumarAcierto(String palabraEsp){
-        for(int i=0;i<listaPalabrasCopia.size();i++){
-            if(listaPalabrasCopia.get(i).traduceSpanish.equals(palabraEsp))
-                listaPalabrasCopia.get(i).numAciertosTest++;
+    public int modificarPalabra(String palabraIng, String nuevaPalabraIng, String nuevaPalabraEsp){
+        try{
+            Palabra palabra = getPalabraIngles(palabraIng);
+            db = conn.getWritableDatabase();
+            if(db != null){
+                db.execSQL("UPDATE Palabra SET ingles = '"+nuevaPalabraIng+"', español = '"+nuevaPalabraEsp+"' WHERE ingles = '"+palabra.getTraduceEnglish()+"'");
+                db.close();
+                rellenarListado();
+                return 1;
+            }
+            rellenarListado();
+            return 0;
+        }
+        catch (SQLException e){
+            return 0;
+        }
+    }
+
+    public Palabra getPalabraIngles(String ingles){
+        for(Palabra palabra: listaPalabras){
+            if(palabra.getTraduceEnglish().equals(ingles))
+                return palabra;
+        }
+        return null;
+    }
+
+    public Palabra getPalabraEspañol(String español){
+        for(Palabra palabra: listaPalabras){
+            if(palabra.getTraduceSpanish().equals(español))
+                return palabra;
+        }
+        return null;
+    }
+
+    public Palabra getPalabraPorPos(int posicion){
+        return palabrasIng.get(posicion);
+    }
+
+    public int eliminarPalabra(Palabra palabra){
+        try{
+            db = conn.getWritableDatabase();
+            if(db!=null){
+                db.execSQL("DELETE FROM Palabra WHERE ingles = '"+palabra.getTraduceEnglish()+"'");
+                db.close();
+                rellenarListado();
+                return 1;
+            }
+            rellenarListado();
+            return 0;
+        }
+        catch(SQLException e){
+            return 0;
+        }
+    }
+
+    public int sumarAcierto(String palabraEsp){
+        try{
+            Palabra palabra = getPalabraEspañol(palabraEsp);
+            db = conn.getWritableDatabase();
+            if(db != null){
+                db.execSQL("UPDATE Palabra SET numaciertos = '"+(palabra.getNumAciertosTest()+1)+"' WHERE español = '"+palabra.getTraduceSpanish()+"'");
+                db.close();
+                rellenarListado();
+                return 1;
+            }
+            rellenarListado();
+            return 0;
+        }
+        catch (SQLException e){
+            return 0;
         }
     }
 
@@ -69,8 +156,8 @@ public class DAOPalabra{
 
     public static void generarRespuestasAleatorias(ArrayList<String> respuestas) {
         while (respuestas.size() < 3) {
-            int randomIndex = (int) (Math.random() * listaPalabrasCopia.size());
-            Palabra randomRespuesta = listaPalabrasCopia.get(randomIndex);
+            int randomIndex = (int) (Math.random() * listaPalabras.size());
+            Palabra randomRespuesta = listaPalabras.get(randomIndex);
             if (!randomRespuesta.traduceSpanish.equals(palabra.traduceSpanish) && !respuestas.contains(randomRespuesta.traduceSpanish))
                 respuestas.add(randomRespuesta.traduceSpanish);
         }
@@ -78,79 +165,155 @@ public class DAOPalabra{
         Collections.shuffle(respuestas);
     }
 
-    public static void mostrarTodo(){
-        palabrasIng = new ArrayList<String>();
-        Collections.shuffle(listaPalabrasCopia);
-        for(int i=0;i<listaPalabrasCopia.size();i++)
-        {
-            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
-            palabrasIng.add(palabraIng);
-        }
-    }
-
-    public static void ordenAlfabetico(){
-        palabrasIng = new ArrayList<String>();
-        for(int i=0;i<listaPalabrasCopia.size();i++)
-        {
-            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
-            palabrasIng.add(palabraIng);
-        }
-        Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
-    }
-
-    public static void ordenAciertos(){
-        palabrasIng = new ArrayList<String>();
-        Collections.sort(listaPalabrasCopia, (new Comparator<Palabra>() {
-            public int compare(Palabra i1, Palabra i2) {
-                return i1.numAciertosTest.compareTo(i2.numAciertosTest);
+    public int mostrarTodo() {
+        try {
+            palabrasIng = new ArrayList<Palabra>();
+            db = conn.getWritableDatabase();
+            if (db != null) {
+                Cursor c = db.rawQuery("SELECT ingles FROM Palabra", null);
+                if (c.moveToFirst()) {
+                    do {
+                        palabrasIng.add(new Palabra(c.getString(0)));
+                    }
+                    while (c.moveToNext());
+                }
+                c.close();
+                db.close();
+                return 1;
             }
-        }).reversed());
-        for(int i=0;i<listaPalabrasCopia.size();i++)
-        {
-            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
-            palabrasIng.add(palabraIng);
+            return 0;
+        } catch (SQLException e) {
+            return 0;
         }
     }
 
-    public static void mostrarIngles(){
+    public int ordenAlfabetico(){
+            try {
+                palabrasIng = new ArrayList<Palabra>();
+                db = conn.getWritableDatabase();
+                if (db != null) {
+                    Cursor c = db.rawQuery("SELECT ingles FROM Palabra", null);
+                    if (c.moveToFirst()){
+                        do {
+                            palabrasIng.add(new Palabra(c.getString(0)));
+                        }
+                        while (c.moveToNext());
+                    }
+                    c.close();
+                    db.close();
+                    Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
+                    return 1;
+                }
+                return 0;
+            }
+            catch (SQLException e) {
+                return 0;
+            }
+    }
+
+    public int ordenAciertos(){
+        try {
+            palabrasIng = new ArrayList<Palabra>();
+            db = conn.getWritableDatabase();
+            if (db != null) {
+                Cursor c = db.rawQuery("SELECT ingles FROM Palabra", null);
+                if (c.moveToFirst()) {
+                    do {
+                        palabrasIng.add(new Palabra(c.getString(0)));
+                    }
+                    while (c.moveToNext());
+                    Collections.sort(palabrasIng, new Comparator<Palabra>() {
+                        public int compare(Palabra i1, Palabra i2) {
+                            return String.valueOf(i1.getNumAciertosTest()).compareTo(String.valueOf(i2.getNumAciertosTest()));
+                        }
+                    }.reversed());
+                }
+                c.close();
+                db.close();
+                return 1;
+            }
+            return 0;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+
+    public void mostrarIngles(){
         ordenAlfabetico();
     }
 
-    public static void mostrarEspanol(){
-        palabrasIng = new ArrayList<String>();
-        for(int i=0;i<listaPalabrasCopia.size();i++)
-        {
-            String palabraIng = listaPalabrasCopia.get(i).traduceSpanish;
-            palabrasIng.add(palabraIng);
+    public int mostrarEspanol() {
+        try {
+            palabrasIng = new ArrayList<Palabra>();
+            db = conn.getWritableDatabase();
+            if (db != null) {
+                Cursor c = db.rawQuery("SELECT español FROM Palabra", null);
+                if (c.moveToFirst()) {
+                    do {
+                        palabrasIng.add(new Palabra(c.getString(0)));
+                    }
+                    while (c.moveToNext());
+                }
+                c.close();
+                db.close();
+                return 1;
+            }
+            return 0;
+        } catch (SQLException e) {
+            return 0;
         }
     }
 
-    public static void mostrarSoloPalabras(){
-        palabrasIng = new ArrayList<String>();
-        for(int i=0;i<listaPalabrasCopia.size();i++)
-        {
-            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
-            if(listaPalabrasCopia.get(i).tipoPalabra.equals(TipoPalabra.PALABRA))
-                palabrasIng.add(palabraIng);
+    public int mostrarSoloPalabras(){
+        try {
+            palabrasIng = new ArrayList<Palabra>();
+            db = conn.getWritableDatabase();
+            if (db != null) {
+                Cursor c = db.rawQuery("SELECT ingles FROM Palabra WHERE tipo = 'PALABRA'", null);
+                if (c.moveToFirst()){
+                    do {
+                        palabrasIng.add(new Palabra(c.getString(0)));
+                    }
+                    while (c.moveToNext());
+                }
+                c.close();
+                db.close();
+                return 1;
+            }
+            return 0;
         }
-        Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
+        catch (SQLException e) {
+            return 0;
+        }
     }
 
-    public static void mostrarSoloExpresiones(){
-        palabrasIng = new ArrayList<String>();
-        for(int i=0;i<listaPalabrasCopia.size();i++)
-        {
-            String palabraIng = listaPalabrasCopia.get(i).traduceEnglish;
-            if(listaPalabrasCopia.get(i).tipoPalabra.equals(TipoPalabra.EXPRESION))
-                palabrasIng.add(palabraIng);
-        }
-        Collections.sort(palabrasIng, new OrdenAlfabeticoComparator());
+    public int mostrarSoloExpresiones(){
+            try {
+                palabrasIng = new ArrayList<Palabra>();
+                db = conn.getWritableDatabase();
+                if (db != null) {
+                    Cursor c = db.rawQuery("SELECT ingles FROM Palabra WHERE tipo = 'EXPRESION'", null);
+                    if (c.moveToFirst()){
+                        do {
+                            palabrasIng.add(new Palabra(c.getString(0)));
+                        }
+                        while (c.moveToNext());
+                    }
+                    c.close();
+                    db.close();
+                    return 1;
+                }
+                return 0;
+            }
+            catch (SQLException e) {
+                return 0;
+            }
     }
 
     public void generarTest(){
         ordenAciertos();
         for (int i=0;i<5;i++){
-            test.add(listaPalabrasCopia.get((listaPalabrasCopia.size()-1)-i));
+            test.add(listaPalabras.get((listaPalabras.size()-1)-i));
         }
     }
 

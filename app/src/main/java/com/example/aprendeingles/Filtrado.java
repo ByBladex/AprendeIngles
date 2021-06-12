@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class Filtrado extends AppCompatActivity {
-    DAOPalabra daoPalabra = new DAOPalabra();
+    DAOPalabra daoPalabra = new DAOPalabra(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class Filtrado extends AppCompatActivity {
 
         ListView listViewPalabras = findViewById(R.id.listViewPalabras);
 
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, daoPalabra.palabrasIng);
+        ArrayAdapter<Palabra> adaptador = new ArrayAdapter<Palabra>(this, android.R.layout.simple_list_item_1, daoPalabra.getPalabrasIng());
         listViewPalabras.setAdapter(adaptador);
         listViewPalabras.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -44,8 +44,7 @@ public class Filtrado extends AppCompatActivity {
                 dialogo1.setCancelable(false);
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                        daoPalabra.listaPalabrasCopia.remove(posicion);
-                        daoPalabra.palabrasIng.remove(posicion);
+                        daoPalabra.eliminarPalabra(daoPalabra.getPalabraPorPos(posicion));
                         adaptador.notifyDataSetChanged();
                     }
                 });

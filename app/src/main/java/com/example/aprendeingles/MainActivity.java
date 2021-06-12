@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        Button btnBuscar = findViewById(R.id.btnBuscar);
+        Button btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnBuscar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

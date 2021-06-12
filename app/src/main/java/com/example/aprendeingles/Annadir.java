@@ -1,21 +1,26 @@
 package com.example.aprendeingles;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.LocalDateTime;
+import java.util.GregorianCalendar;
+
 public class Annadir extends AppCompatActivity {
-    DAOPalabra daoPalabra = new DAOPalabra();
+    DAOPalabra daoPalabra = new DAOPalabra(this);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_annadir);
-        daoPalabra.crearListaCopia();
 
         Button btnAnnadir = findViewById(R.id.btnAñadirPalabra);
         EditText txtAnnadirPalabraIng = findViewById(R.id.txtAnnadirPalabraIng);
@@ -28,16 +33,17 @@ public class Annadir extends AppCompatActivity {
                 if(!txtAnnadirPalabraIng.getText().toString().isEmpty() && !txtAnnadirPalabraEsp.getText().toString().isEmpty()) {
                     if (radioBtnExpresion.isChecked() || radioBtnPalabra.isChecked()) {
                         if (radioBtnExpresion.isChecked()){
-                            daoPalabra.insertarPalabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.EXPRESION);
+                            daoPalabra.insertarPalabra(new Palabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.EXPRESION.toString()));
                         }
 
                         else if (radioBtnPalabra.isChecked()){
-                            daoPalabra.insertarPalabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.PALABRA);
+                            daoPalabra.insertarPalabra(new Palabra(txtAnnadirPalabraIng.getText().toString(), txtAnnadirPalabraEsp.getText().toString(), TipoPalabra.PALABRA.toString()));
                         }
                     }
                 }
             }
         });
+
         Button btnModificar = findViewById(R.id.btnModificarPalabra);
         EditText txtModificarPalabraIng = findViewById(R.id.txtModificarPalabraIng);
         EditText txtModificarPalabraIng2 = findViewById(R.id.txtModificarPalabraIng2);
@@ -50,7 +56,7 @@ public class Annadir extends AppCompatActivity {
                 if(!txtModificarPalabraIng.getText().toString().isEmpty() && !txtModificarPalabraEsp.getText().toString().isEmpty()
                   && !txtModificarPalabraIng2.getText().toString().isEmpty() && !txtModificarPalabraEsp2.getText().toString().isEmpty()){
 
-                    daoPalabra.modificarPalabra(txtModificarPalabraIng.getText().toString(), txtModificarPalabraEsp.getText().toString(), txtModificarPalabraIng2.getText().toString(), txtModificarPalabraEsp2.getText().toString());
+                    daoPalabra.modificarPalabra(txtModificarPalabraIng.getText().toString(), txtModificarPalabraIng2.getText().toString(), txtModificarPalabraEsp2.getText().toString());
                 }
             }
         });

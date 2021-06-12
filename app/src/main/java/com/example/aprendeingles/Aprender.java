@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Aprender extends AppCompatActivity {
-    DAOPalabra daoPalabra = new DAOPalabra();
+    DAOPalabra daoPalabra = new DAOPalabra(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,6 @@ public class Aprender extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_aprender);
-        daoPalabra.crearListaCopia();
         daoPalabra.reiniciarTest();
         daoPalabra.generarTest();
 
