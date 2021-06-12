@@ -14,15 +14,12 @@ public class ConexionSQLite extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NOMBRE = "bd_aprendeingles";
 
-    String sqlCreate = "CREATE TABLE \"Palabra\" (\n" +
-            "\t\"ingles\"\tTEXT NOT NULL,\n" +
-            "\t\"español\"\tTEXT NOT NULL,\n" +
-            "\t\"tipo\"\tTEXT NOT NULL,\n" +
-            "\t\"fechaintro\"\tTEXT NOT NULL,\n" +
-            "\t\"fechaulttest\"\tTEXT NOT NULL,\n" +
-            "\t\"numaciertos\"\tINT NOT NULL,\n" +
-            "\tPRIMARY KEY(\"ingles\")\n" +
-            ")";
+    String sqlCreate = "CREATE TABLE Palabra (ingles TEXT PRIMARY KEY,"+
+            "español TEXT NOT NULL," +
+            "tipo TEXT NOT NULL," +
+            "fechaintro TEXT NOT NULL," +
+            "fechaulttest TEXT NOT NULL," +
+            "numaciertos INT NOT NULL)";
 
     public ConexionSQLite(@Nullable Context context) {
         super(context, DATABASE_NOMBRE, null, DATABASE_VERSION);
@@ -31,7 +28,7 @@ public class ConexionSQLite extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(sqlCreate);
-        db.execSQL("INSERT INTO Palabra (ingles, español, tipo, fechaintro, fechaulttest, numaciertos) VALUES ('Milk','Leche', 'PALABRA', '13,02,2021','15,02,2021',0), ('Cow','Vaca','PALABRA', '13,02,2021', '14,02,2021',0), ('House','Casa','PALABRA', '13,02,2021', '14,02,2021',0), ('Milk','Leche','PALABRA', '13,02,2021', '13,02,2021',0)");
+        db.execSQL("INSERT INTO Palabra (id, ingles, español, tipo, fechaintro, fechaulttest, numaciertos) VALUES ('1','Milk','Leche', 'PALABRA', '13,02,2021','15,02,2021',0), ('2','Cow','Vaca','PALABRA', '13,02,2021', '14,02,2021',0), ('3','House','Casa','PALABRA', '13,02,2021', '14,02,2021',0), ('4','Milk','Leche','PALABRA', '13,02,2021', '13,02,2021',0)");
     }
 
 
