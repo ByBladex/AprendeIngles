@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Aprender extends AppCompatActivity {
-    DAOPalabra daoPalabra = new DAOPalabra(this);
+    private IDAOPalabra daoPalabra = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,8 @@ public class Aprender extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_aprender);
+        daoPalabra = DAOPalabra.getInstance(getApplicationContext());
+
         daoPalabra.reiniciarTest();
         daoPalabra.generarTest();
 
@@ -63,10 +65,10 @@ public class Aprender extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn1.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
+                if(btn1.getText().toString().equals(daoPalabra.getPalabra().traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.getPalabra().traduceSpanish);
                 }
-                if(!daoPalabra.test.isEmpty()){
+                if(!daoPalabra.getTest().isEmpty()){
                     finish();
                     startActivity(getIntent());
                 }
@@ -80,10 +82,10 @@ public class Aprender extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn2.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
+                if(btn2.getText().toString().equals(daoPalabra.getPalabra().traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.getPalabra().traduceSpanish);
                 }
-                if(!daoPalabra.test.isEmpty()){
+                if(!daoPalabra.getTest().isEmpty()){
                     finish();
                     startActivity(getIntent());
                 }
@@ -97,10 +99,10 @@ public class Aprender extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn3.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
+                if(btn3.getText().toString().equals(daoPalabra.getPalabra().traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.getPalabra().traduceSpanish);
                 }
-                if(!daoPalabra.test.isEmpty()){
+                if(!daoPalabra.getTest().isEmpty()){
                     finish();
                     startActivity(getIntent());
                 }
@@ -114,10 +116,10 @@ public class Aprender extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn4.getText().toString().equals(daoPalabra.palabra.traduceSpanish)){
-                    daoPalabra.sumarAcierto(daoPalabra.palabra.traduceSpanish);
+                if(btn4.getText().toString().equals(daoPalabra.getPalabra().traduceSpanish)){
+                    daoPalabra.sumarAcierto(daoPalabra.getPalabra().traduceSpanish);
                 }
-                if(!daoPalabra.test.isEmpty()){
+                if(!daoPalabra.getTest().isEmpty()){
                     finish();
                     startActivity(getIntent());
                 }

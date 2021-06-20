@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class Filtrado extends AppCompatActivity {
-    DAOPalabra daoPalabra = new DAOPalabra(this);
+    private IDAOPalabra daoPalabra = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,11 @@ public class Filtrado extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_filtrado);
+        daoPalabra = DAOPalabra.getInstance(getApplicationContext());
 
         ListView listViewPalabras = findViewById(R.id.listViewPalabras);
 
-        ArrayAdapter<Palabra> adaptador = new ArrayAdapter<Palabra>(this, android.R.layout.simple_list_item_1, daoPalabra.getPalabrasIng());
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, daoPalabra.getPalabrasToString());
         listViewPalabras.setAdapter(adaptador);
         listViewPalabras.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

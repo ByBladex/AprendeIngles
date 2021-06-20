@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class DAOPalabra{
+public class DAOPalabra implements IDAOPalabra{
+    private static IDAOPalabra dao = null;
     public static ArrayList<Palabra> listaPalabras;
     public static ArrayList<Palabra> palabrasIng;
     public static ArrayList<Palabra> test= new ArrayList<Palabra>();
@@ -30,6 +31,14 @@ public class DAOPalabra{
         return palabrasIng;
     }
 
+    public ArrayList<String> getPalabrasToString(){
+        ArrayList<String> cadena = new ArrayList<>();
+        for (Palabra palabra:palabrasIng) {
+            cadena.add(palabra.traduceEnglish);
+        }
+        return cadena;
+    }
+
     public int rellenarListado(){
         try{
             db = conn.getWritableDatabase();
@@ -38,7 +47,7 @@ public class DAOPalabra{
                 Cursor c = db.rawQuery("SELECT * FROM Palabra", null);
                 if(c.moveToFirst()){
                     do{
-                        listaPalabras.add(new Palabra(c.getString(0),c.getString(1),c.getString(2),c.getString(3),c.getInt(4)));
+                        listaPalabras.add(new Palabra(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5)));
                     }
                     while(c.moveToNext());
                 }
@@ -57,8 +66,8 @@ public class DAOPalabra{
         try{
             db = conn.getWritableDatabase();
             if(db!=null){
-                db.execSQL("INSERT INTO Palabra (ingles, español, tipo, fechaintro,fechaulttest, numaciertos) " +
-                        "VALUES ('"+palabra.getTraduceEnglish()+"', '"+palabra.getTraduceSpanish()+"', '"+palabra.getTipoPalabra()+"', '"
+                db.execSQL("INSERT INTO Palabra (id, ingles, español, tipo, fechaintro,fechaulttest, numaciertos) " +
+                        "VALUES ("+(listaPalabras.size()+1)+",'"+palabra.getTraduceEnglish()+"', '"+palabra.getTraduceSpanish()+"', '"+palabra.getTipoPalabra()+"', '"
                         +palabra.getFechaIntro()+"', '"+palabra.getFechaUltTest()+"', '"+palabra.getNumAciertosTest()+"')");
                 rellenarListado();
                 db.close();
@@ -146,7 +155,7 @@ public class DAOPalabra{
         }
     }
 
-    public static String generarPalabraAleatoria(){
+    public String generarPalabraAleatoria(){
         palabra = test.get(ind);
         ind++;
         String siguientePalabra = palabra.traduceEnglish + " " + palabra.numAciertosTest;
@@ -154,7 +163,7 @@ public class DAOPalabra{
         return siguientePalabra;
     }
 
-    public static void generarRespuestasAleatorias(ArrayList<String> respuestas) {
+    public void generarRespuestasAleatorias(ArrayList<String> respuestas) {
         while (respuestas.size() < 3) {
             int randomIndex = (int) (Math.random() * listaPalabras.size());
             Palabra randomRespuesta = listaPalabras.get(randomIndex);
@@ -319,5 +328,19 @@ public class DAOPalabra{
 
     public void reiniciarTest(){
         test.clear();
+    }
+
+    public Palabra getPalabra(){
+        return palabra;
+    }
+
+    public ArrayList<Palabra> getTest(){
+        return test;
+    }
+
+    public static IDAOPalabra getInstance(Context context) {
+        if (dao == null) dao = new DAOPalabra(context);
+
+        return dao;
     }
 }

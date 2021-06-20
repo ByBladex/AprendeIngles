@@ -16,11 +16,12 @@ import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 
 public class Annadir extends AppCompatActivity {
-    DAOPalabra daoPalabra = new DAOPalabra(this);
+    private IDAOPalabra daoPalabra = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_annadir);
+        daoPalabra = DAOPalabra.getInstance(getApplicationContext());
 
         Button btnAnnadir = findViewById(R.id.btnAñadirPalabra);
         EditText txtAnnadirPalabraIng = findViewById(R.id.txtAnnadirPalabraIng);

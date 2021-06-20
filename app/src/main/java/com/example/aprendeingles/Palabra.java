@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 
 public class Palabra {
+    Integer id;
     String traduceEnglish;
     String traduceSpanish;
     String tipoPalabra;
@@ -11,7 +12,8 @@ public class Palabra {
     String fechaUltTest;
     int numAciertosTest;
 
-    Palabra(String traduceEnglish, String traduceSpanish, String tipoPalabra, String fechaUltTest, int numAciertosTest){
+    Palabra(Integer id, String traduceEnglish, String traduceSpanish, String tipoPalabra, String fechaUltTest, int numAciertosTest){
+        this.id=id;
         this.traduceEnglish = traduceEnglish;
         this.traduceSpanish = traduceSpanish;
         this.tipoPalabra = tipoPalabra;
@@ -24,6 +26,14 @@ public class Palabra {
         this.traduceEnglish = traduceEnglish;
         this.traduceSpanish = traduceSpanish;
         this.tipoPalabra = tipoPalabra;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     Palabra(String traduceEnglish) {
